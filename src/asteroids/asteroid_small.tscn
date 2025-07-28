@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ps1adatywo4j"]
+
+[node name="AsteroidSmall" type="RigidBody2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-2, -7, -6, -5, -7, 0, -4, 3, -2, 7, 4, 7, 7, 4, 7, -2, 7, -4, 2, -3, -2, -7, -6, -5)
+width = 2.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -7, -6, -5, -7, 0, -4, 3, -2, 7, 4, 7, 7, 4, 7, -4, 2, -3)

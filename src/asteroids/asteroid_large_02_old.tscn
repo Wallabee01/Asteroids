@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6v8lps88njs4"]
+
+[ext_resource type="Shader" uid="uid://dsfmy440l4hco" path="res://resources/shaders/glow.gdshader" id="1_i1ra2"]
+[ext_resource type="Texture2D" uid="uid://mwt01pkf8kkh" path="res://assets/asteroids/large_asteroid_02.png" id="1_rxx5n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b45fn"]
+shader = ExtResource("1_i1ra2")
+
+[node name="AsteroidLarge02" type="RigidBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_b45fn")
+polygon = PackedVector2Array(-3, -16, -13, -13, -16, -6, -16, -1, -13, 12, -3, 16, 9, 16, 16, 4, 15, -8, 10, -13, 0, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rxx5n")

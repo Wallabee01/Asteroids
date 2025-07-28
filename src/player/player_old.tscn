@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cq5nwgws0aae4"]
+
+[ext_resource type="Texture2D" uid="uid://brd80x8nwfo8e" path="res://assets/player/player16x16.png" id="1_4anbu"]
+[ext_resource type="Script" uid="uid://casudhns3wqmi" path="res://src/player/player.gd" id="1_rxibo"]
+[ext_resource type="Texture2D" uid="uid://v4b7m4sva5ix" path="res://assets/particles/particle1x1.png" id="2_mf2ua"]
+[ext_resource type="Shader" uid="uid://v8jierrs7wb1" path="res://resources/shaders/fake_glow.gdshader" id="3_244u8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jiejy"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 90.0
+direction = Vector3(0, 0, 0)
+flatness = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_244u8"]
+shader = ExtResource("3_244u8")
+shader_parameter/intensity = 30.0
+shader_parameter/texture_size = Vector2(16, 16)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_rxibo")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 5)
+emitting = false
+amount = 25
+texture = ExtResource("2_mf2ua")
+lifetime = 0.35
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_jiejy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-6, 8, -1, -8, 1, -8, 6, 8, 3, 6, -3, 6)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_244u8")
+texture = ExtResource("1_4anbu")

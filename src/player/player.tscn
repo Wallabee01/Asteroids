@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfojp7xbs3dnq"]
+
+[ext_resource type="Script" uid="uid://casudhns3wqmi" path="res://src/player/player.gd" id="1_rxibo"]
+[ext_resource type="Texture2D" uid="uid://75yl6tq1vy1t" path="res://assets/bullet/bullet.png" id="2_rxibo"]
+
+[sub_resource type="Curve" id="Curve_mf2ua"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.606695, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_244u8"]
+curve = SubResource("Curve_mf2ua")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rxibo"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 90.0
+direction = Vector3(0, 1, 0)
+spread = 30.0
+flatness = 1.0
+initial_velocity_min = 25.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_244u8")
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_rxibo")
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 12)
+emitting = false
+amount = 25
+texture = ExtResource("2_rxibo")
+lifetime = 0.2
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_rxibo")
+
+[node name="BulletSpawn" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -18)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, -16, -8, 16, -4, 12, 4, 12, 8, 16, 0, -16)
+width = 2.0
