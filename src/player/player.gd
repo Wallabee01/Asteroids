@@ -3,14 +3,19 @@ extends Node2D
 const BULLET_SCENE: PackedScene = preload("res://src/bullet/bullet.tscn")
 const ROTATION_SPEED = 3.0        # radians per second
 const ACCELERATION = 100.0
-const MAX_SPEED = 100.0
-const FRICTION = 0.98
+const MAX_SPEED = 200.0
+const SIZE_OFFSET: Vector2 = Vector2(8.0 / 2.0, 16.0 / 2.0)
 
 @onready var gpu_particles_2d = %GPUParticles2D
 @onready var shoot_timer = %ShootTimer
 @onready var bullet_spawn = %BulletSpawn
 
+var start_pos: Vector2
 var velocity = Vector2.ZERO
+
+
+func _ready():
+	start_pos = global_position
 
 
 func _physics_process(delta):
@@ -32,7 +37,6 @@ func _physics_process(delta):
 	global_position += velocity * delta
 	
 	if Input.is_action_pressed("shoot") && shoot_timer.is_stopped():
-		var direction = Vector2.UP.rotated(rotation)
 		var bullet_instance = BULLET_SCENE.instantiate()
 		get_parent().find_child("Bullets").add_child(bullet_instance)
 		bullet_instance.init(Vector2.UP.rotated(rotation))
@@ -40,6 +44,12 @@ func _physics_process(delta):
 		shoot_timer.start()
 	
 	_handle_screen_wrap()
+
+
+func _reset():
+	global_position = start_pos
+	velocity = Vector2.ZERO
+	rotation = 0.0
 
 
 func _handle_screen_wrap():
@@ -54,3 +64,8 @@ func _handle_screen_wrap():
 		global_position.y = screen_size.y
 	elif global_position.y > screen_size.y:
 		global_position.y = 0
+
+
+func _on_area_2d_area_entered(area):
+	GameEvents.ship_destroyed.emit()
+	_reset()

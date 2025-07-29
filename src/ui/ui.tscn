@@ -1,0 +1,126 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsplmhff6odia"]
+
+[ext_resource type="Script" uid="uid://dxfn478bcosbx" path="res://src/ui/ui.gd" id="1_sp1ie"]
+[ext_resource type="Theme" uid="uid://du01pvjvkf7dy" path="res://resources/ui/themes/theme.tres" id="2_jlntk"]
+
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_sp1ie")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "9999999"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Life01" type="Line2D" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+position = Vector2(-8, 8)
+points = PackedVector2Array(0, -16, -8, 16, -4, 12, 4, 12, 8, 16, 0, -16)
+width = 2.0
+
+[node name="Life02" type="Line2D" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+position = Vector2(-28, 8)
+points = PackedVector2Array(0, -16, -8, 16, -4, 12, 4, 12, 8, 16, 0, -16)
+width = 2.0
+
+[node name="Life03" type="Line2D" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+position = Vector2(-48, 8)
+points = PackedVector2Array(0, -16, -8, 16, -4, 12, 4, 12, 8, 16, 0, -16)
+width = 2.0
+
+[node name="Life04" type="Line2D" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+position = Vector2(-68, 8)
+points = PackedVector2Array(0, -16, -8, 16, -4, 12, 4, 12, 8, 16, 0, -16)
+width = 2.0
+
+[node name="Life05" type="Line2D" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+position = Vector2(-88, 8)
+points = PackedVector2Array(0, -16, -8, 16, -4, 12, 4, 12, 8, 16, 0, -16)
+width = 2.0
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HighscoreLabel" type="Label" parent="MarginContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="PausePanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PausePanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PauseLabel" type="Label" parent="PausePanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="PausePanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_jlntk")
+text = "Quit"
+
+[node name="StartPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartCenterContainer" type="CenterContainer" parent="StartPanelContainer"]
+layout_mode = 2
+
+[node name="StartLabel" type="Label" parent="StartPanelContainer/StartCenterContainer"]
+layout_mode = 2
+text = "Press 's' to start"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="PausePanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

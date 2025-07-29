@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1aijjfoqwkyq" path="res://src/asteroids/asteroid_small.gd" id="1_5hs1n"]
 
 [node name="AsteroidSmall" type="Area2D"]
-collision_layer = 2
+collision_layer = 0
 script = ExtResource("1_5hs1n")
 
 [node name="Line2D" type="Line2D" parent="."]
