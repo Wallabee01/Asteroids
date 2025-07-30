@@ -70,6 +70,9 @@ start={
 
 2d_physics/layer_1="bullet"
 2d_physics/layer_2="asteroid"
+2d_physics/layer_3="alien"
+2d_physics/layer_4="alien_bullet"
+2d_physics/layer_5="player"
 
 [physics]
 

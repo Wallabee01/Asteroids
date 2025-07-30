@@ -6,18 +6,25 @@ signal asteroid_destroyed(points: int)
 signal score_changed(score: int)
 signal lives_changed(lives: int)
 signal highscore_changed(highscore: int)
+signal alien_destroyed
 signal ship_destroyed
 signal level_complete
+signal level_changed(level)
 signal game_over
 
 var score: int = 0
 var highscore: int = 0
 var lives: int = 5
+var level: int = 0
+var player: Node2D
+var is_alien: bool = false
 
 
 func _ready():
 	asteroid_destroyed.connect(_on_asteroid_destroyed)
+	alien_destroyed.connect(_on_alien_destroyed)
 	ship_destroyed.connect(_on_ship_destroyed)
+	level_complete.connect(_on_level_complete)
 
 
 func _on_asteroid_destroyed(points):
@@ -30,6 +37,7 @@ func _on_ship_destroyed():
 	lives_changed.emit(lives)
 	
 	if lives == 0:
+		await get_tree().create_timer(2.05).timeout
 		game_over.emit()
 		_reset()
 
@@ -45,8 +53,19 @@ func _reset():
 	
 	score = 0
 	lives = 5
+	level = 0
 	score_changed.emit(score)
 	lives_changed.emit(lives)
+	level_changed.emit(level)
+
+
+func _on_alien_destroyed():
+	is_alien = false
+
+
+func _on_level_complete():
+	level += 1
+	level_changed.emit(level)
 
 
 func _exit_tree():

@@ -10,6 +10,6 @@ func _on_area_entered(area):
 	
 	call_deferred("_spawn_asteroids", "Small")
 	
-	GameEvents.asteroid_destroyed.emit(10)
+	GameEvents.asteroid_destroyed.emit(50)
 	
 	call_deferred("queue_free")

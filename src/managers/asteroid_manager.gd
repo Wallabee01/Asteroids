@@ -2,17 +2,17 @@ extends Node2D
 
 const ASTEROID_LARGE_SCENE: PackedScene = preload("res://src/asteroids/asteroid_large.tscn")
 const SPAWN_OFFSET: float = 32.0
-const SPAWN_SAFE_RADIUS: float = 64.0
+const SPAWN_SAFE_RADIUS: float = 96.0
 const MAX_SPEED: float = 100.0
 const MIN_SPAWN_ANGLE: float = -0.1
 const MAX_SPAWN_ANGLE: float = 0.5
 const MIN_SPAWN_SPEED_MULTIPLIER: float = 0.75
 const MAX_SPAWN_SPEED_MULTIPLIER: float = 1.75
-const START_ASTERIOD_COUNT = 6
+const START_ASTEROID_COUNT = 5
 const ASTEROID_GROW_COUNT = 1
 const NEW_LEVEL_DELAY: float = 1.0
 
-var asteroid_count: int = START_ASTERIOD_COUNT
+var asteroid_count: int = START_ASTEROID_COUNT
 
 
 func _ready():
@@ -51,5 +51,5 @@ func _on_game_over():
 	for child in get_children():
 		child.call_deferred("queue_free")
 	
-	asteroid_count = START_ASTERIOD_COUNT
+	asteroid_count = START_ASTEROID_COUNT
 	call_deferred("_spawn_asteroids")

@@ -1,4 +1,5 @@
 extends Area2D
+class_name Bullet
 
 const ACCELERATION = 10000.0
 const MAX_SPEED = 750.0

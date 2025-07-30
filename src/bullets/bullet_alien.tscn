@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7iv85owc50i"]
+
+[ext_resource type="Script" uid="uid://bgu1gehtwu1l5" path="res://src/bullets/bullet_alien.gd" id="1_rxht6"]
+[ext_resource type="Texture2D" uid="uid://v4b7m4sva5ix" path="res://assets/particles/particle1x1.png" id="2_xchng"]
+[ext_resource type="Texture2D" uid="uid://75yl6tq1vy1t" path="res://assets/bullet/bullet.png" id="3_kk523"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70hgr"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3m588"]
+radius = 4.12311
+
+[node name="BulletAlien" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_rxht6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.25
+one_shot = true
+autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 128
+texture = ExtResource("2_xchng")
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_70hgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3m588")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_kk523")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

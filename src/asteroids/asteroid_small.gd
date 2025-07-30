@@ -8,6 +8,6 @@ func _on_area_entered(area):
 	get_parent().add_child(explosion_instance)
 	explosion_instance.global_position = global_position
 	
-	GameEvents.asteroid_destroyed.emit(10)
+	GameEvents.asteroid_destroyed.emit(100)
 	
 	call_deferred("queue_free")

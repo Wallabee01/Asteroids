@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://v4b7m4sva5ix" path="res://assets/particles/particle1x1.png" id="1_rdh5j"]
 [ext_resource type="Texture2D" uid="uid://75yl6tq1vy1t" path="res://assets/bullet/bullet.png" id="1_s7lrt"]
-[ext_resource type="Script" uid="uid://dnxsyk7u37esd" path="res://src/bullet/bullet.gd" id="1_t1kaa"]
+[ext_resource type="Script" uid="uid://dnxsyk7u37esd" path="res://src/bullets/bullet.gd" id="1_t1kaa"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t1kaa"]
 particle_flag_disable_z = true

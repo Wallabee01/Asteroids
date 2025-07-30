@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0t1spumn5xxn"]
+
+[ext_resource type="Script" uid="uid://hu1ki8o6v6pn" path="res://src/aliens/alien_large.gd" id="1_iaan6"]
+
+[node name="AlienLarge" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_iaan6")
+
+[node name="VerticleMoveTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="VerticleMoveDurationTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -8, -16, 0, -31, 4, -24, 8, 24, 8, 31, 4, 16, 0, 8, -8)
+
+[node name="Line2D4" type="Line2D" parent="."]
+points = PackedVector2Array(-8, -8, -16, 0, -32, 4, -24, 8, 24, 8, 32, 4, 16, 0, 8, -8, -8, -8, -16, 0)
+width = 1.0
+
+[node name="Line2D5" type="Line2D" parent="."]
+points = PackedVector2Array(16, 0, -16, 0)
+width = 1.0
+
+[node name="Line2D6" type="Line2D" parent="."]
+points = PackedVector2Array(31, 4, -31, 4)
+width = 1.0
+
+[node name="BulletSpawn" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 10)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="VerticleMoveTimer" to="." method="_on_verticle_move_timer_timeout"]
+[connection signal="timeout" from="VerticleMoveDurationTimer" to="." method="_on_verticle_move_duration_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
