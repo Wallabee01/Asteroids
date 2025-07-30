@@ -1,15 +1,7 @@
 extends Asteroid
 
 
-func _on_area_entered(area):
-	area.queue_free()
-	#TODO: Explosion sfx
-	var explosion_instance = EXPLOSION_SCENE.instantiate()
-	get_parent().add_child(explosion_instance)
-	explosion_instance.global_position = global_position
-	
+func _on_asteroid_destroyed():
 	call_deferred("_spawn_asteroids", "Small")
 	
 	GameEvents.asteroid_destroyed.emit(50)
-	
-	call_deferred("queue_free")

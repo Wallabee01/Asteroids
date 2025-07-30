@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbu07v0vlvn4x"]
+
+[ext_resource type="Script" uid="uid://1fvyxji2ax34" path="res://src/components/standalone_stream_player.gd" id="1_bvexn"]
+
+[node name="StandaloneStreamPlayer" type="AudioStreamPlayer"]
+script = ExtResource("1_bvexn")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

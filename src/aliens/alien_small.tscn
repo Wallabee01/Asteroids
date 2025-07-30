@@ -1,10 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://iv4b38k27ms2"]
+[gd_scene load_steps=4 format=3 uid="uid://iv4b38k27ms2"]
 
 [ext_resource type="Script" uid="uid://d304qwcde6hls" path="res://src/aliens/alien_small.gd" id="1_e81xp"]
+[ext_resource type="AudioStream" uid="uid://odcoajwaoh61" path="res://assets/audio/sfx/laser3.ogg" id="2_tgfpo"]
+[ext_resource type="AudioStream" uid="uid://cxig4lgbh02ui" path="res://assets/audio/sfx/spaceEngine_000.ogg" id="3_g0ddq"]
 
 [node name="AlienSmall" type="Area2D"]
 collision_layer = 4
 script = ExtResource("1_e81xp")
+
+[node name="ShootStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_tgfpo")
+volume_db = 1.926
+
+[node name="EngineStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g0ddq")
+autoplay = true
+parameters/looping = true
 
 [node name="VerticleMoveTimer" type="Timer" parent="."]
 unique_name_in_owner = true

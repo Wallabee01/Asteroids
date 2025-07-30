@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce5316d3dfgbo"]
+[gd_scene load_steps=7 format=3 uid="uid://ce5316d3dfgbo"]
 
 [ext_resource type="PackedScene" uid="uid://bsplmhff6odia" path="res://src/ui/ui.tscn" id="1_kgj8g"]
 [ext_resource type="PackedScene" uid="uid://cfojp7xbs3dnq" path="res://src/player/player.tscn" id="1_qnjlk"]
+[ext_resource type="Script" uid="uid://g5g6gdn7axkh" path="res://src/game/game.gd" id="1_xptat"]
 [ext_resource type="PackedScene" uid="uid://wxwyvehxdb2l" path="res://src/managers/asteroid_manager.tscn" id="2_s6lek"]
 [ext_resource type="PackedScene" uid="uid://dqchtotpg5wkp" path="res://src/managers/alien_manager.tscn" id="3_l80un"]
 
@@ -19,6 +20,10 @@ glow_hdr_scale = 2.01
 glow_hdr_luminance_cap = 13.11
 
 [node name="Game" type="Node"]
+script = ExtResource("1_xptat")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qnjlk")

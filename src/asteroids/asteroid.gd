@@ -1,6 +1,12 @@
 extends Area2D
 class_name Asteroid
 
+const DEATH_SFX_01: AudioStream = preload("res://assets/audio/sfx/hit1.ogg")
+const DEATH_SFX_02: AudioStream = preload("res://assets/audio/sfx/hit2.ogg")
+const DEATH_SFX_03: AudioStream = preload("res://assets/audio/sfx/hit3.ogg")
+const DEATH_SFX_04: AudioStream = preload("res://assets/audio/sfx/hit4.ogg")
+const DEATH_SFX_05: AudioStream = preload("res://assets/audio/sfx/hit5.ogg")
+const STAND_ALONE_STREAM_PLAYER: PackedScene = preload("res://src/components/standalone_stream_player.tscn")
 const EXPLOSION_SCENE: PackedScene = preload("res://src/components/explosion_gpu_particles_2d.tscn")
 const MAX_SPEED: float = 100
 const SPAWN_OFFSET: float = 32.0
@@ -18,6 +24,7 @@ var asteroid_type_to_spawn: PackedScene
 @onready var collision_polygon_2d_2 = %CollisionPolygon2D2
 @onready var line_2d_3 = %Line2D3
 @onready var collision_polygon_2d_3 = %CollisionPolygon2D3
+
 
 
 func _ready():
@@ -79,15 +86,34 @@ func _spawn_asteroid():
 	asteroid_instance.set_velocity(initial_velocity)
 
 
+func _on_asteroid_destroyed():
+	call_deferred("_spawn_asteroids", "Medium")
+	
+	GameEvents.asteroid_destroyed.emit(20)
+
+
 func _on_area_entered(area):
 	area.queue_free()
-	#TODO: Explosion sfx
+	
+	var stand_alone_stream_player_instance = STAND_ALONE_STREAM_PLAYER.instantiate()
+	get_parent().add_child(stand_alone_stream_player_instance)
+	var death_sound_roll: float = randf()
+	if death_sound_roll >= 0.0 && death_sound_roll < 0.2:
+		stand_alone_stream_player_instance.stream = DEATH_SFX_01
+	elif death_sound_roll >= 0.2 && death_sound_roll < 0.4:
+		stand_alone_stream_player_instance.stream = DEATH_SFX_02
+	elif death_sound_roll >= 0.4 && death_sound_roll < 0.6:
+		stand_alone_stream_player_instance.stream = DEATH_SFX_03
+	elif death_sound_roll >= 0.6 && death_sound_roll < 0.8:
+		stand_alone_stream_player_instance.stream = DEATH_SFX_04
+	elif death_sound_roll >= 0.8 && death_sound_roll <+ 1.0:
+		stand_alone_stream_player_instance.stream = DEATH_SFX_05
+	stand_alone_stream_player_instance.play()
+	
 	var explosion_instance = EXPLOSION_SCENE.instantiate()
 	get_parent().add_child(explosion_instance)
 	explosion_instance.global_position = global_position
 	
-	call_deferred("_spawn_asteroids", "Medium")
-	
-	GameEvents.asteroid_destroyed.emit(20)
+	_on_asteroid_destroyed()
 	
 	call_deferred("queue_free")
